@@ -44,11 +44,6 @@ const PhotoUploader: React.FC<PhotoUploaderProps> = ({ photos, folderName }) => 
   };
 
   const handleUpload = async () => {
-    if (photos.length !== 4) {
-      alert("Você precisa tirar 4 fotos para fazer o upload.");
-      return;
-    }
-
     const accessToken = await getAccessToken();
     if (!accessToken) {
       return;
@@ -67,8 +62,7 @@ const PhotoUploader: React.FC<PhotoUploaderProps> = ({ photos, folderName }) => 
   return (
     <button
       onClick={handleUpload}
-      className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg"
-      disabled={photos.length !== 4}
+      className="px-4 py-2 bg-green-500 text-white rounded-lg"
     >
       Enviar Fotos
     </button>

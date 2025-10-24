@@ -5,37 +5,32 @@ import CameraComponent from "./CameraComponent";
 import PhotoPreview from "./PhotoPreview";
 import PhotoUploader from "./PhotoUploader";
 
-const CameraManager: React.FC = () => {
+interface CameraManagerProps {
+  onClose: () => void;
+}
+
+const CameraManager: React.FC<CameraManagerProps> = ({ onClose }) => {
   const [photos, setPhotos] = useState<string[]>([]);
   const folderName = "Henrique Venceu"; // Este nome pode ser dinâmico no futuro
 
   const handleCapture = (imageSrc: string) => {
-    if (photos.length < 4) {
-      setPhotos([...photos, imageSrc]);
-    }
+    setPhotos([...photos, imageSrc]);
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold text-center mb-4">
-        Tire 4 Fotos
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          {photos.length < 4 ? (
-            <CameraComponent onCapture={handleCapture} />
-          ) : (
-            <p className="text-center text-green-500 font-bold">
-              Você já tirou 4 fotos!
-            </p>
-          )}
-        </div>
-        <div>
-          <PhotoPreview photos={photos} />
-        </div>
-      </div>
-      <div className="text-center mt-4">
+    <div className="relative w-screen h-screen">
+      <CameraComponent onCapture={handleCapture} />
+      <div className="absolute top-0 left-0 w-full p-4 bg-black bg-opacity-50 flex justify-between items-center">
+        <button onClick={onClose} className="text-white font-bold">
+          Fechar
+        </button>
+        <h1 className="text-2xl font-bold text-center text-white">
+          Tire Fotos
+        </h1>
         <PhotoUploader photos={photos} folderName={folderName} />
+      </div>
+      <div className="absolute bottom-20 left-0 w-full">
+        <PhotoPreview photos={photos} />
       </div>
     </div>
   );
