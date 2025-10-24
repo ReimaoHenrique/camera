@@ -18,16 +18,17 @@ const CameraComponent: React.FC<CameraComponentProps> = ({ onCapture }) => {
   }, [webcamRef, onCapture]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="relative w-full h-full">
       <Webcam
         audio={false}
         ref={webcamRef}
         screenshotFormat="image/webp"
-        className="rounded-lg"
+        videoConstraints={{ facingMode: "environment" }}
+        className="w-full h-full object-cover"
       />
       <button
         onClick={capture}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-blue-500 text-white rounded-lg"
       >
         Tirar Foto
       </button>

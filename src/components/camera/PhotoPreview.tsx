@@ -9,15 +9,15 @@ interface PhotoPreviewProps {
 
 const PhotoPreview: React.FC<PhotoPreviewProps> = ({ photos }) => {
   return (
-    <div className="flex flex-wrap justify-center mt-4">
+    <div className="flex justify-center w-full">
       {photos.map((photo, index) => (
-        <div key={index} className="w-1/4 p-2">
+        <div key={index} className="w-16 h-16 mx-2 border-2 border-white rounded-lg overflow-hidden">
           <Image
             src={photo}
             alt={`Foto ${index + 1}`}
-            width={100}
-            height={100}
-            className="rounded-lg"
+            width={64}
+            height={64}
+            className="object-cover w-full h-full"
           />
         </div>
       ))}
