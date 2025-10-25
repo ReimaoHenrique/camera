@@ -1,11 +1,9 @@
 const getAccessToken = async (): Promise<string | null> => {
   try {
-    const response = await fetch(
-      "https://gcs-token-service.vercel.app/api/generate-token",
-      {
-        method: "POST",
-      }
-    );
+    // Usando a rota da API local como proxy
+    const response = await fetch("/api/generate-token", {
+      method: "POST",
+    });
     if (!response.ok) {
       throw new Error(`Failed to get access token: ${response.statusText}`);
     }
